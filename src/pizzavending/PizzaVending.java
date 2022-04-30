@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
@@ -130,7 +131,13 @@ public class PizzaVending extends Application {
             //get the content of available pizza temporary list and add to observable list
             availablePizza = FXCollections.observableArrayList(availablePizzaTempList);
             //populate the ordered list with the content of available pizza observable list
-            OrderedPizzaList.setItems(availablePizza);
+            OrderedPizzaList.getItems().add(availablePizza.get(availablePizza.size() - 1));
+            //add an image to an ordered pizzaC:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\
+            ImageView imageView = new ImageView();
+            imageView.setFitHeight(40);
+            imageView.setFitWidth(40);
+            imageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\pizza.jpg").toURI().toString()));
+            OrderedPizzaList.getItems().add(imageView);
             //a series of activities to populate the total payment labels both on the main page and on the confirm page dialog
             //get the content of the selected value from available pizza list and convert to string
             String currentValue = AvailablePizzaList.getSelectionModel().getSelectedItem().toString();
@@ -141,7 +148,9 @@ public class PizzaVending extends Application {
             //set the total price both on the main page and on the confirm dialog
             TotalPayMainLabel.setText("Total : € " + currentTotalPrice);
             TotalPayConfirmLabel.setText("Total : € " + currentTotalPrice);
+
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
