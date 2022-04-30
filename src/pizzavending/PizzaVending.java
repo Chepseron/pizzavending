@@ -1,5 +1,6 @@
 package PizzaVending;
 
+import com.sun.javafx.scene.control.skin.LabeledText;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,6 +12,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -23,6 +25,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -156,9 +160,9 @@ public class PizzaVending extends Application {
                 OrderedPizzaList.setItems(availablePizza);
                 //a series of activities to populate the total payment labels both on the main page and on the confirm page dialog
                 //get the content of the selected value from available pizza list and convert to string
-                String currentValue = OrderedPizzaList.getSelectionModel().getSelectedItem().toString();
+                String currentValue = AvailablePizzaList.getSelectionModel().getSelectedItems().toString();
                 //split the selected item and obtain the second value from the array(to get the integer value for price)
-                double currentPrice = Double.parseDouble(currentValue.split("-€")[1]);
+                double currentPrice = Double.parseDouble(currentValue.split("-€")[1].replaceAll("]", ""));
                 //get the sum of existing and add to the selected price above
                 currentTotalPrice = currentTotalPrice - currentPrice;
                 //set the total price both on the main page and on the confirm dialog
@@ -166,6 +170,8 @@ public class PizzaVending extends Application {
                 TotalPayConfirmLabel.setText("Total : € " + currentTotalPrice);
             }
         } catch (Exception ex) {
+
+            ex.printStackTrace();
         }
     }
 
@@ -221,7 +227,6 @@ public class PizzaVending extends Application {
             progressBar.setVisible(true);
             //set the text on confirm payment dialog label to 'Preparing your order'
             TotalPayConfirmLabel.setText("Preparing your order");
-
             //set the progress bar to delay for 15 countable times
             int counter = 15;
             for (int i = 0; i < counter; i++) {
@@ -427,6 +432,17 @@ public class PizzaVending extends Application {
             CancelPaymentBtn.setOnAction(this::cancelPayment);
             //Button to confirm a payment
             ConfirmPaymentBtn.setOnAction(this::updateProgress);
+            //handle the double click on Available pizza list view
+            AvailablePizzaList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2
+                            && (event.getTarget() instanceof LabeledText || ((GridPane) event.getTarget()).getChildren().size() > 0)) {
+                        //call the add order event    
+                        addOrder(null);
+                    }
+                }
+            });
 
         } catch (Exception ex) {
             ex.printStackTrace();
