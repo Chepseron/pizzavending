@@ -13,13 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
@@ -76,6 +75,8 @@ public class PizzaVending extends Application {
     protected final ProgressBar progressBar;
     //declaration of image view to display the image on confirm payment
     protected final ImageView imageView;
+    //declaration of image view to display the pizza image
+    protected final ImageView PizzaImageView;
 
     public PizzaVending() {
         //instantiate the main anchor pane and main titled pane
@@ -112,6 +113,8 @@ public class PizzaVending extends Application {
         imageView = new ImageView();
         //instantiate the progress bar on confirm payment dialog
         progressBar = new ProgressBar();
+        //instantiate the image view to show pizza
+        PizzaImageView = new ImageView();
     }
 
     public static void main(String[] args) {
@@ -132,12 +135,6 @@ public class PizzaVending extends Application {
             availablePizza = FXCollections.observableArrayList(availablePizzaTempList);
             //populate the ordered list with the content of available pizza observable list
             OrderedPizzaList.getItems().add(availablePizza.get(availablePizza.size() - 1));
-            //add an image to an ordered pizzaC:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\
-            ImageView imageView = new ImageView();
-            imageView.setFitHeight(40);
-            imageView.setFitWidth(40);
-            imageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\pizza.jpg").toURI().toString()));
-            OrderedPizzaList.getItems().add(imageView);
             //a series of activities to populate the total payment labels both on the main page and on the confirm page dialog
             //get the content of the selected value from available pizza list and convert to string
             String currentValue = AvailablePizzaList.getSelectionModel().getSelectedItem().toString();
@@ -148,9 +145,10 @@ public class PizzaVending extends Application {
             //set the total price both on the main page and on the confirm dialog
             TotalPayMainLabel.setText("Total : € " + currentTotalPrice);
             TotalPayConfirmLabel.setText("Total : € " + currentTotalPrice);
+            //call the change pizza image 
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            displayDialog("You have not selected any pizza");
         }
     }
 
@@ -179,8 +177,7 @@ public class PizzaVending extends Application {
                 TotalPayConfirmLabel.setText("Total : € " + currentTotalPrice);
             }
         } catch (Exception ex) {
-
-            ex.printStackTrace();
+            displayDialog("You have not selected any pizza");
         }
     }
 
@@ -266,6 +263,63 @@ public class PizzaVending extends Application {
         dialog.showAndWait();
     }
 
+    protected void changePizzaImage(ActionEvent actionEvent) {
+        try {
+
+            //get the selected pizza from the list
+            int index = AvailablePizzaList.getSelectionModel().getSelectedIndex();
+            //switch between the pizza varieties while displaying the image
+            switch (index) {
+                case 2:
+                    //change the image to meat lovers pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\ml.jpg").toURI().toString()));
+                    break;
+                case 3:
+                      //change the image to original margarita
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\om.jpg").toURI().toString()));
+                    break;
+                case 4:
+                      //change the image to veggie supreme pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\vs.jpg").toURI().toString()));
+                    break;
+                case 5:
+                      //change the image to mighty pepperoni pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\mp.jpg").toURI().toString()));
+                    break;
+                case 6:
+                      //change the image to hawaian pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\hp.jpg").toURI().toString()));
+                    break;
+                case 7:
+                      //change the image to full house pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\fh.jpg").toURI().toString()));
+                    break;
+                case 8:
+                      //change the image to house special pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\hs.jpg").toURI().toString()));
+                    break;
+                case 9:
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\hs2.jpg").toURI().toString()));
+                    break;
+                case 10:
+                      //change the image to vegan chick aint pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\vc.jpg").toURI().toString()));
+                    break;
+                case 11:
+                      //change the image to gluten free pizza
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\gf.jpg").toURI().toString()));
+                    break;
+                default:
+                    PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\pizza.jpg").toURI().toString()));
+                    break;
+
+            }
+
+        } catch (Exception ex) {
+
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         //set the title for the main stage to Add to your order and press pay to take pizza
@@ -277,10 +331,9 @@ public class PizzaVending extends Application {
         MainTitledPane.setPrefWidth(800.0);
         //set the default text for display
         MainTitledPane.setText("Add to your order and press pay to take pizza");
-
         //set the position of X and Y axis in the layout
-        AvailablePizzaList.setLayoutX(111.0);
-        AvailablePizzaList.setLayoutY(63.0);
+        AvailablePizzaList.setLayoutX(112.0);
+        AvailablePizzaList.setLayoutY(176.0);
         //set the preffered height and width 
         AvailablePizzaList.setPrefHeight(276.0);
         AvailablePizzaList.setPrefWidth(200.0);
@@ -288,38 +341,48 @@ public class PizzaVending extends Application {
         AvailablePizzaList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         //set the position of X and Y axis in the layout
         OrderedPizzaList.setLayoutX(453.0);
-        OrderedPizzaList.setLayoutY(63.0);
+        OrderedPizzaList.setLayoutY(176.0);
         //set the preffered height and width 
         OrderedPizzaList.setPrefHeight(271.0);
         OrderedPizzaList.setPrefWidth(200.0);
         //set the position of X and Y axis in the layout
-        AddOrderBtn.setLayoutX(321.0);
-        AddOrderBtn.setLayoutY(63.0);
+        AddOrderBtn.setLayoutX(322.0);
+        AddOrderBtn.setLayoutY(176.0);
         //set the default text for display
         AddOrderBtn.setText("Add to order");
         //set the position of X and Y axis in the layout
-        RemoveOrderBtn.setLayoutX(321.0);
-        RemoveOrderBtn.setLayoutY(107.0);
+        RemoveOrderBtn.setLayoutX(322.0);
+        RemoveOrderBtn.setLayoutY(220.0);
         //set the default text for display
         RemoveOrderBtn.setText("Remove from order");
         //set the position of X and Y axis in the layout
         ClearOrderBtn.setLayoutX(321.0);
-        ClearOrderBtn.setLayoutY(151.0);
+        ClearOrderBtn.setLayoutY(264.0);
         //set the default text for display
         ClearOrderBtn.setText("Clear order");
         //set the position of X and Y axis in the layout
-        VendingMachineLabel.setLayoutX(112.0);
+        VendingMachineLabel.setLayoutX(290.0);
         VendingMachineLabel.setLayoutY(22.0);
         //set the default text for display
         VendingMachineLabel.setText("Pizza vending machine - create order");
+
+        PizzaImageView.setFitHeight(150.0);
+        PizzaImageView.setFitWidth(150.0);
+        //set the position of X and Y axis in the layout
+        PizzaImageView.setLayoutX(322.0);
+        PizzaImageView.setLayoutY(50.0);
+        PizzaImageView.setPickOnBounds(true);
+        PizzaImageView.setPreserveRatio(true);
+        //set the default place holder image of the image holder on confirm payment dialog
+        PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\pizza.jpg").toURI().toString()));
         //set the position of X and Y axis in the layout
         AddToOrderLabel.setLayoutX(112.0);
-        AddToOrderLabel.setLayoutY(355.0);
+        AddToOrderLabel.setLayoutY(465.0);
         //set the default text for display
         AddToOrderLabel.setText("Adding to order");
         //set the position of X and Y axis in the layout
         PayBtn.setLayoutX(622.0);
-        PayBtn.setLayoutY(352.0);
+        PayBtn.setLayoutY(465.0);
         PayBtn.setText("Pay");
         //set the position of X and Y axis in the layout
         TotalPayMainLabel.setLayoutX(456.0);
@@ -388,6 +451,7 @@ public class PizzaVending extends Application {
 
         //add all the child elements to the main anchor pane
         MainAnchorPane.getChildren().add(AvailablePizzaList);
+        MainAnchorPane.getChildren().add(PizzaImageView);
         MainAnchorPane.getChildren().add(OrderedPizzaList);
         MainAnchorPane.getChildren().add(AddOrderBtn);
         MainAnchorPane.getChildren().add(RemoveOrderBtn);
@@ -452,9 +516,19 @@ public class PizzaVending extends Application {
                     }
                 }
             });
+            //get the selected pizza on single click
+            AvailablePizzaList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1
+                            && (event.getTarget() instanceof LabeledText || ((GridPane) event.getTarget()).getChildren().size() > 0)) {
+                        //call the change image function on a single click   
+                        changePizzaImage(null);
+                    }
+                }
+            });
 
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 
