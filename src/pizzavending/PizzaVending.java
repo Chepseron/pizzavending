@@ -124,8 +124,8 @@ public class PizzaVending extends Application {
             Logger.getLogger(PizzaVending.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//function to add order on clicking the AddOrderBtn
 
+    //function to add order on clicking the AddOrderBtn
     protected void addOrder(ActionEvent actionEvent) {
 
         try {
@@ -152,6 +152,7 @@ public class PizzaVending extends Application {
         }
     }
 
+    //a function to remove the order
     protected void removeOrder(ActionEvent actionEvent) {
         try {
 
@@ -181,6 +182,7 @@ public class PizzaVending extends Application {
         }
     }
 
+    //a function to confirm payment
     protected void confirmPayment(ActionEvent actionEvent) {
         try {
             //check if the ordered list view is empty
@@ -196,6 +198,7 @@ public class PizzaVending extends Application {
         }
     }
 
+    //a function to cancel payment
     protected void cancelPayment(ActionEvent actionEvent) {
         try {
             //
@@ -205,6 +208,7 @@ public class PizzaVending extends Application {
         }
     }
 
+    //a function to clear the order
     protected void clearOrder(ActionEvent actionEvent) {
         try {
 
@@ -225,6 +229,7 @@ public class PizzaVending extends Application {
 
         }
     }
+    //function to update progress 
 
     protected void updateProgress(ActionEvent actionEvent) {
         try {
@@ -329,7 +334,6 @@ public class PizzaVending extends Application {
         //add the style sheets
         scene.getStylesheets().add(PizzaVending.class.getResource("styling.css").toExternalForm());
         primaryStage.setScene(scene);
-
         //set the preffered height and width 
         MainTitledPane.setPrefHeight(600.0);
         MainTitledPane.setPrefWidth(800.0);
@@ -369,7 +373,7 @@ public class PizzaVending extends Application {
         VendingMachineLabel.setLayoutY(22.0);
         //set the default text for display
         VendingMachineLabel.setText("Pizza vending machine - create order");
-
+        //set the width and height of the pizza image
         PizzaImageView.setFitHeight(150.0);
         PizzaImageView.setFitWidth(150.0);
         //set the position of X and Y axis in the layout
