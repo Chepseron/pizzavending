@@ -325,7 +325,11 @@ public class PizzaVending extends Application {
         //set the title for the main stage to Add to your order and press pay to take pizza
         primaryStage.setTitle("Add to your order and press pay to take pizza");
         StackPane root = new StackPane();
-        primaryStage.setScene(new Scene(root, 900, 750));
+        Scene scene = new Scene(root, 900, 750);
+        //add the style sheets
+        scene.getStylesheets().add(PizzaVending.class.getResource("styling.css").toExternalForm());
+        primaryStage.setScene(scene);
+
         //set the preffered height and width 
         MainTitledPane.setPrefHeight(600.0);
         MainTitledPane.setPrefWidth(800.0);
@@ -386,7 +390,7 @@ public class PizzaVending extends Application {
         PayBtn.setText("Pay");
         //set the position of X and Y axis in the layout
         TotalPayMainLabel.setLayoutX(456.0);
-        TotalPayMainLabel.setLayoutY(349.0);
+        TotalPayMainLabel.setLayoutY(465.0);
         //set the default text for display
         TotalPayMainLabel.setText("Total: € 0");
         TotalPayMainLabel.setFont(new Font(24.0));
