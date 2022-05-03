@@ -270,43 +270,43 @@ public class PizzaVending extends Application {
             int index = AvailablePizzaList.getSelectionModel().getSelectedIndex();
             //switch between the pizza varieties while displaying the image
             switch (index) {
-                case 2:
+                case 0:
                     //change the image to meat lovers pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\ml.jpg").toURI().toString()));
                     break;
-                case 3:
-                      //change the image to original margarita
+                case 1:
+                    //change the image to original margarita
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\om.jpg").toURI().toString()));
                     break;
-                case 4:
-                      //change the image to veggie supreme pizza
+                case 2:
+                    //change the image to veggie supreme pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\vs.jpg").toURI().toString()));
                     break;
-                case 5:
-                      //change the image to mighty pepperoni pizza
+                case 3:
+                    //change the image to mighty pepperoni pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\mp.jpg").toURI().toString()));
                     break;
-                case 6:
-                      //change the image to hawaian pizza
+                case 4:
+                    //change the image to hawaian pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\hp.jpg").toURI().toString()));
                     break;
-                case 7:
-                      //change the image to full house pizza
+                case 5:
+                    //change the image to full house pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\fh.jpg").toURI().toString()));
                     break;
-                case 8:
-                      //change the image to house special pizza
+                case 6:
+                    //change the image to house special pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\hs.jpg").toURI().toString()));
                     break;
-                case 9:
+                case 7:
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\hs2.jpg").toURI().toString()));
                     break;
-                case 10:
-                      //change the image to vegan chick aint pizza
+                case 8:
+                    //change the image to vegan chick aint pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\vc.jpg").toURI().toString()));
                     break;
-                case 11:
-                      //change the image to gluten free pizza
+                case 9:
+                    //change the image to gluten free pizza
                     PizzaImageView.setImage(new Image(new File("C:\\Users\\asabul\\Documents\\NetBeansProjects\\PizzaVending\\src\\pizzavending\\gf.jpg").toURI().toString()));
                     break;
                 default:
